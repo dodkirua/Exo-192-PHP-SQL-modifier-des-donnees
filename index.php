@@ -1,4 +1,5 @@
 <?php
+require "DB.php";
 /**
  * 1. Le dossier SQL contient l'export de ma table user.
  * 2. Trouvez comment importer cette table dans une des bases de données que vous avez créées, si vous le souhaitez vous pouvez en créer une nouvelle pour cet exercice.
@@ -9,12 +10,17 @@
  */
 
 // TODO Votre code ici.
+
 try {
-    ...
+    $db = new DB();
+    $db->requestUser('Toto','Alphonse','rue de la blague','69','69169','Tetaqueue','France','totp@blague.fr');
+    $last = DB::getInstance()->lastInsertId();
+    $db->modData("user","prenom","Gérard",$last);
 }
-catch...
+catch (PDOException $exception) {
+    echo $exception->getMessage();
 
-
+}
 
 /**
  * Théorie
@@ -26,3 +32,5 @@ catch...
  *     $id = $bdd->lastInsertId();
  * }
  */
+
+
